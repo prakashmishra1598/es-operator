@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: es-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: es-operator
+  template:
+    metadata:
+      labels:
+        name: es-operator
+    spec:
+      serviceAccountName: es-operator
+      containers:
+        - name: es-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - es-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "es-operator"
