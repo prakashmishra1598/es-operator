@@ -1,0 +1,7 @@
+apiVersion: elasticsearchcluster.prakash.com/v1alpha1
+kind: ElasticsearchCluster
+metadata:
+  name: example-elasticsearchcluster
+spec:
+  # Add fields here
+  size: 3
